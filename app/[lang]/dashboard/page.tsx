@@ -189,10 +189,6 @@ export default function DashboardPage({ params }: { params: { lang: Locale } }) 
                             <RadioGroupItem id="g-f" value="female" />
                             <Label htmlFor="g-f">Perempuan</Label>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <RadioGroupItem id="g-o" value="other" />
-                            <Label htmlFor="g-o">Lainnya</Label>
-                          </div>
                         </RadioGroup>
                       </div>
                       <div className="grid gap-2">
