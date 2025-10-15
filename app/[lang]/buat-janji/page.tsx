@@ -1,4 +1,5 @@
 "use client"
+import { use } from "react"
 import { getDictionary, type Locale } from "@/lib/i18n"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -14,8 +15,9 @@ import { faCalendarDays, faClock, faStethoscope } from "@fortawesome/free-solid-
 const SERVICES = ["Cedera Olahraga", "Rehab Pasca Operasi", "Rehab Neurologis"]
 const TIMES = ["09:00", "10:00", "11:00", "13:00", "15:00", "17:00"]
 
-export default function BookPage({ params }: { params: { lang: Locale } }) {
-  const dict = getDictionary(params.lang)
+export default function BookPage({ params }: { params: Promise<{ lang: Locale }> }) {
+  const { lang } = use(params)
+  const dict = getDictionary(lang)
   const [step, setStep] = useState(1)
   const [service, setService] = useState(SERVICES[0])
   const [date, setDate] = useState<Date | undefined>(undefined)
@@ -32,7 +34,9 @@ export default function BookPage({ params }: { params: { lang: Locale } }) {
         <Card className="backdrop-blur supports-[backdrop-filter]:bg-card/70 animate-in fade-in duration-300">
           <CardContent className="pt-6">
             <h2 className="font-medium mb-3 flex items-center gap-2">
-              <FontAwesomeIcon className="text-primary" icon={faStethoscope} />
+              <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                <FontAwesomeIcon className="text-primary w-full h-full" icon={faStethoscope} fixedWidth />
+              </div>
               {dict.booking.step1}
             </h2>
             <RadioGroup value={service} onValueChange={setService} className="grid gap-3">
@@ -58,14 +62,18 @@ export default function BookPage({ params }: { params: { lang: Locale } }) {
           <CardContent className="pt-6 grid gap-6">
             <div>
               <h2 className="font-medium mb-3 flex items-center gap-2">
-                <FontAwesomeIcon className="text-primary" icon={faCalendarDays} />
+                <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                  <FontAwesomeIcon className="text-primary w-full h-full" icon={faCalendarDays} fixedWidth />
+                </div>
                 {dict.booking.step2}
               </h2>
               <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border w-fit" />
             </div>
             <div>
               <h3 className="font-medium mb-2 flex items-center gap-2">
-                <FontAwesomeIcon className="text-primary" icon={faClock} />
+                <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                  <FontAwesomeIcon className="text-primary w-full h-full" icon={faClock} fixedWidth />
+                </div>
                 Waktu Tersedia
               </h3>
               <div className="grid grid-cols-3 gap-2">

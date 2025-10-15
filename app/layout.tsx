@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
+import '@/lib/fontawesome'
 
 export const metadata: Metadata = {
   title: "Gang Sehat",
@@ -43,6 +44,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = document.cookie.match(/theme=([^;]+)/)?.[1] || 'light';
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+        <link
+          rel="preload"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          as="style"
+        />
+      </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable}`} suppressHydrationWarning>
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         {process.env.NODE_ENV === "production" && <Analytics />}
