@@ -16,7 +16,7 @@ export default function Footer({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang)
   const year = new Date().getFullYear()
   return (
-    <footer className="border-t mt-10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <footer className="border-t mt-10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 pb-10 lg:pb-0">
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-3">
