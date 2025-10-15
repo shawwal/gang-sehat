@@ -28,7 +28,7 @@ export default function Footer({ lang }: { lang: Locale }) {
             <div className="flex items-center gap-3 pt-2">
               <a
                 aria-label="Instagram"
-                href="https://instagram.com"
+                href="https://www.instagram.com/fisioterapigangsehat/?hl=en"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-accent/50"

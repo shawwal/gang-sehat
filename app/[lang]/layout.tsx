@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { cookies } from "next/headers"
 import type { ReactNode } from "react"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { AuthProvider } from "@/components/providers/auth-provider"
@@ -34,19 +33,14 @@ export default function LangLayout({
   children: ReactNode
   params: { lang: Locale }
 }) {
-  const theme = cookies().get("theme")?.value || "light"
   return (
-    <html lang={params.lang} className={theme === "dark" ? "dark" : ""}>
-      <body>
-        <AuthProvider>
-          <ThemeProvider defaultTheme={theme as "light" | "dark"}>
-            <Header lang={params.lang} />
-            <main className="min-h-[calc(100dvh-64px)]">{children}</main>
-            <BottomTabs lang={params.lang} />
-            <Footer lang={params.lang} />
-          </ThemeProvider>
-        </AuthProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <ThemeProvider defaultTheme="light">
+        <Header lang={params.lang} />
+        <main className="min-h-[calc(100dvh-64px)]">{children}</main>
+        <BottomTabs lang={params.lang} />
+        <Footer lang={params.lang} />
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
